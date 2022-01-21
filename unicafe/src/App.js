@@ -8,10 +8,10 @@ const Button = ({ text, handleClick }) => {
   return <button onClick={handleClick}>{text}</button>;
 };
 
-const Item = ({ name, total }) => {
+const Item = ({ name, result }) => {
   return (
     <p>
-      {name} {total}
+      {name} {result}
     </p>
   );
 };
@@ -25,6 +25,17 @@ const App = () => {
   const handleNeutralClick = () => setNeutral(neutral + 1);
   const handleBadClick = () => setBad(bad + 1);
 
+  const handleFeedbackAverage = () => (good + neutral + bad) / 3;
+  const handlePositiveFeedback = () => {
+    const total = good + neutral + bad;
+
+    if (total === 0) {
+      return `0%`;
+    }
+
+    return `${good / total}%`;
+  };
+
   return (
     <div>
       <Display title="Give Feedback" />
@@ -33,9 +44,12 @@ const App = () => {
       <Button handleClick={handleBadClick} text="Bad" />
 
       <Display title="Statistics" />
-      <Item name="Good" total={good} />
-      <Item name="Neutral" total={neutral} />
-      <Item name="Bad" total={bad} />
+      <Item name="Good" result={good} />
+      <Item name="Neutral" result={neutral} />
+      <Item name="Bad" result={bad} />
+      <Item name="All" result={good + neutral + bad} />
+      <Item name="Average" result={handleFeedbackAverage()} />
+      <Item name="Positive" result={handlePositiveFeedback()} />
     </div>
   );
 };
