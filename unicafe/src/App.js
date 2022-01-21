@@ -8,7 +8,7 @@ const Button = ({ text, handleClick }) => {
   return <button onClick={handleClick}>{text}</button>;
 };
 
-const Item = ({ name, result }) => {
+const StatisticLine = ({ name, result }) => {
   return (
     <p>
       {name} {result}
@@ -23,12 +23,12 @@ const Statistics = (props) => {
   if (good || neutral || bad) {
     return (
       <>
-        <Item name="Good" result={good} />
-        <Item name="Neutral" result={neutral} />
-        <Item name="Bad" result={bad} />
-        <Item name="All" result={good + neutral + bad} />
-        <Item name="Average" result={handleFeedbackAverage()} />
-        <Item name="Positive" result={handlePositiveFeedback()} />
+        <StatisticLine name="Good" result={good} />
+        <StatisticLine name="Neutral" result={neutral} />
+        <StatisticLine name="Bad" result={bad} />
+        <StatisticLine name="All" result={good + neutral + bad} />
+        <StatisticLine name="Average" result={handleFeedbackAverage()} />
+        <StatisticLine name="Positive" result={handlePositiveFeedback()} />
       </>
     );
   }
