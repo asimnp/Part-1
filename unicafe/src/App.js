@@ -16,6 +16,22 @@ const Item = ({ name, result }) => {
   );
 };
 
+const Statistics = (props) => {
+  const [good, neutral, bad, handleFeedbackAverage, handlePositiveFeedback] =
+    props.data;
+  return (
+    <>
+      <Display title="Statistics" />
+      <Item name="Good" result={good} />
+      <Item name="Neutral" result={neutral} />
+      <Item name="Bad" result={bad} />
+      <Item name="All" result={good + neutral + bad} />
+      <Item name="Average" result={handleFeedbackAverage()} />
+      <Item name="Positive" result={handlePositiveFeedback()} />
+    </>
+  );
+};
+
 const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
@@ -43,13 +59,15 @@ const App = () => {
       <Button handleClick={handleNeutralClick} text="Neutral" />
       <Button handleClick={handleBadClick} text="Bad" />
 
-      <Display title="Statistics" />
-      <Item name="Good" result={good} />
-      <Item name="Neutral" result={neutral} />
-      <Item name="Bad" result={bad} />
-      <Item name="All" result={good + neutral + bad} />
-      <Item name="Average" result={handleFeedbackAverage()} />
-      <Item name="Positive" result={handlePositiveFeedback()} />
+      <Statistics
+        data={[
+          good,
+          neutral,
+          bad,
+          handleFeedbackAverage,
+          handlePositiveFeedback,
+        ]}
+      />
     </div>
   );
 };
