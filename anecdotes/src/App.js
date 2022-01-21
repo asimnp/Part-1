@@ -1,5 +1,9 @@
 import { useState } from "react";
 
+const Button = ({ text, handleClick }) => {
+  return <button onClick={handleClick}>{text}</button>;
+};
+
 const App = () => {
   const anecdotes = [
     "If it hurts, do it more often",
@@ -12,6 +16,7 @@ const App = () => {
   ];
 
   const [selected, setSelected] = useState(0);
+  const [votes, setVotes] = useState([0, 0, 0, 0, 0, 0, 0]);
 
   const handleAnecdote = () => {
     const anecdotesLength = anecdotes.length;
@@ -19,10 +24,18 @@ const App = () => {
     setSelected(index);
   };
 
+  const handleVotes = () => {
+    const newVotes = [...votes];
+    newVotes[selected] += 1;
+    setVotes(newVotes);
+  };
+
   return (
     <div>
       <p>{anecdotes[selected]}</p>
-      <button onClick={handleAnecdote}>Next Anecdote</button>
+      <p>Has {votes[selected]} votes</p>
+      <Button text="Vote" handleClick={handleVotes} />
+      <Button text="Next Anecdote" handleClick={handleAnecdote} />
     </div>
   );
 };
